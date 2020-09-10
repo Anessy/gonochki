@@ -113,6 +113,16 @@ function moveRoud() { // ф-ция движения разметки на дор
 function moveEnemy() { // ф-ция движения чужих машин
   let enemys = document.querySelectorAll('.enemy'); // получили все машины
   enemys.forEach((enemy) =>  {
+    let carRect = car.getBoundingClientRect(); // etBoundingClientRect - возвращает размеры и позиции элемента (где у него top bottom left right)
+    let enemyRect = enemy.getBoundingClientRect();
+    if (carRect.top <= enemyRect.bottom 
+      && carRect.right >= enemyRect.left &&
+      carRect.left <= enemyRect.right && 
+      carRect.bottom >= enemyRect.top) { // прописываем алгоритмы столкновения машин
+        setting.start = false;
+        alert('You are lost!')
+        
+    }
     enemy.y += setting.speed / 2; // двигаем
     if (enemy.y >= document.documentElement.clientHeight) { // если у больше высоты экрана
       enemy.y = -100 * setting.traffic; // отрисовать за пределами экрана
